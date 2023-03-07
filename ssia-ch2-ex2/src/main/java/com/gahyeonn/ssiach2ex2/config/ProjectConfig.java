@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
+ * 스프링 컨텍스트에 빈으로 추가해 UserDetailsService와 PasswordEncoder를 정의하는 방법
+ *
  * 자동 구성된 기본 구성 요소 대신 컨텍스트에 추가한 UserDetailsService형식의 인스턴스 이용
  * 사용자, PasswordEncoder 정의 필요
  * 콘솔에 자동 생성된 암호 출력되지 않음
