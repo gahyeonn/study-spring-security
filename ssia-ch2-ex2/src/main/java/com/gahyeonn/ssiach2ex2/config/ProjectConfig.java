@@ -2,6 +2,8 @@ package com.gahyeonn.ssiach2ex2.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -14,8 +16,9 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  * 콘솔에 자동 생성된 암호 출력되지 않음
  */
 
+//WebSecurityConfigurerAdapter 클래스 확장 : 보안이 필요한 엔드포인트에 다른 권한 부여 규칙 선택 가능, configure() 재정의 가능
 @Configuration //클래스를 구성 클래스로 표시
-public class ProjectConfig {
+public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
     //UserDetailsService 빈에 대한 구성 클래스
     @Bean //반환된 값을 스프링 컨텍스트에 빈으로 추가하도록 스프링에 지시
@@ -39,5 +42,13 @@ public class ProjectConfig {
     public PasswordEncoder passwordEncoder() {
         //NoOpPasswordEncoder : 암호를 일반 텍스트로 처리
         return NoOpPasswordEncoder.getInstance();
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.httpBasic();
+        http.authorizeRequests()
+//                .anyRequest().authenticated(); // 모든 요청에 인증 필요
+                .anyRequest().permitAll(); // 모든 요청 인증 필요 X
     }
 }
