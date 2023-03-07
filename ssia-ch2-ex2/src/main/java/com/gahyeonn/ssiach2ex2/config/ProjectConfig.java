@@ -19,7 +19,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  */
 
 //WebSecurityConfigurerAdapter 클래스 확장 : 보안이 필요한 엔드포인트에 다른 권한 부여 규칙 선택 가능, configure() 재정의 가능
-@Configuration //클래스를 구성 클래스로 표시
+//@Configuration //클래스를 구성 클래스로 표시
 public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
     //UserDetailsService 빈에 대한 구성 클래스
