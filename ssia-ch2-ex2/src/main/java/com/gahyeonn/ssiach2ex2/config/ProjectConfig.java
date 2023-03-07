@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
@@ -30,5 +32,12 @@ public class ProjectConfig {
         userDetailsService.createUser(user); //UserDetailsService에서 관리하도록 사용자 추가
 
         return userDetailsService;
+    }
+
+    //PasswordEncoder 등록
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        //NoOpPasswordEncoder : 암호를 일반 텍스트로 처리
+        return NoOpPasswordEncoder.getInstance();
     }
 }
