@@ -9,7 +9,7 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //양식 기반 로그인으로 인증 방식 변경
-        http.formLogin();
+        http.formLogin().defaultSuccessUrl("/home", true);
         http.authorizeRequests().anyRequest().authenticated();
     }
 }
