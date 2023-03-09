@@ -12,8 +12,10 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         //영역(realm)은 특정 인증 방식을 이용하는 보호 공간
         http.httpBasic(c -> {
             c.realmName("OTHER");
+            c.authenticationEntryPoint(new CustomEntryPoint());
         });
 
         http.authorizeRequests().anyRequest().authenticated();
+
     }
 }
