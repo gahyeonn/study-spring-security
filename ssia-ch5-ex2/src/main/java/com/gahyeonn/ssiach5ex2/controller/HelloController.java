@@ -2,6 +2,7 @@ package com.gahyeonn.ssiach5ex2.controller;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.concurrent.DelegatingSecurityContextCallable;
+import org.springframework.security.concurrent.DelegatingSecurityContextExecutorService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,6 +41,23 @@ public class HelloController {
         try{
             var contextTask = new DelegatingSecurityContextCallable<>(task);
             return "Ciao " + e.submit(contextTask).get() + "!";
+        } finally {
+            e.shutdown();
+        }
+    }
+
+    @GetMapping("/hola")
+    public String hola() throws Exception {
+        Callable<String> task = () -> {
+            SecurityContext context = SecurityContextHolder.getContext();
+            return context.getAuthentication().getName();
+        };
+
+        ExecutorService e = Executors.newCachedThreadPool();
+        e = new DelegatingSecurityContextExecutorService(e);
+
+        try {
+            return "Hola, " + e.submit(task).get() + "!";
         } finally {
             e.shutdown();
         }
