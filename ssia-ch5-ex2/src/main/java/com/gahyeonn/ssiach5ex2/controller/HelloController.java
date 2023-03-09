@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
     @GetMapping("/hello")
-    public String hello() {
-        SecurityContext context = SecurityContextHolder.getContext();
-        Authentication a = context.getAuthentication();
-
+    public String hello(Authentication a) {
         return "Hello, " + a.getName() + "!";
     }
 }
