@@ -43,9 +43,10 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic();
 
         http.authorizeRequests()
-                .mvcMatchers(HttpMethod.GET, "/a").authenticated()
-                .mvcMatchers(HttpMethod.POST, "/a").permitAll()
-                .anyRequest().denyAll();
+//                .mvcMatchers(HttpMethod.GET, "/a").authenticated()
+//                .mvcMatchers(HttpMethod.POST, "/a").permitAll()
+                .mvcMatchers("/a/b/**").authenticated() // '**' : 수에 제한 없는 경로, '*' : 경로 이름 하나만 일치
+                .anyRequest().permitAll();
 
         http.csrf().disable(); //POST, PUT, DELETE로 노출된 엔드포인트를 포함해 모든 엔드포인트를 호출할 수 있도록 csrf 보호 비활성화
     }
