@@ -42,8 +42,10 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic();
 
+        //선택기로 요청을 참조할 때는 특정한 규칙부터 일반적인 규칙의 순서로 지정
         http.authorizeRequests()
                 .mvcMatchers("/hello").hasRole("ADMIN") //경로에 mvc 식을 이용해 엔드포인트 선택
-                .mvcMatchers("/ciao").hasRole("MANAGER");
+                .mvcMatchers("/ciao").hasRole("MANAGER")
+                .anyRequest().permitAll(); //위 두 엔드포인트 제외 모든 엔드포인트에 대한 권한 설정 => 없어도 되지만 명시적으로 작성하는게 좋음
     }
 }
