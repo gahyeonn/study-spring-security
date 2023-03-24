@@ -18,12 +18,12 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
         var user1 = User.withUsername("john")
                 .password("12345")
-                .authorities("ROLE_ADMIN") //역할 선언 시에 'ROLE_' 접두사 필요
+                .roles("ADMIN") //역할 선언 시에 'ROLE_' 접두사 필요
                 .build();
 
         var user2 = User.withUsername("jane")
                 .password("12345")
-                .authorities("ROLE_MANAGER")
+                .roles("MANAGER")
                 .build();
 
         manager.createUser(user1);
