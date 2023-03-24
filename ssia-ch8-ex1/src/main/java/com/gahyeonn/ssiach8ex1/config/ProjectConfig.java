@@ -46,6 +46,7 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .mvcMatchers("/hello").hasRole("ADMIN") //경로에 mvc 식을 이용해 엔드포인트 선택
                 .mvcMatchers("/ciao").hasRole("MANAGER")
-                .anyRequest().permitAll(); //위 두 엔드포인트 제외 모든 엔드포인트에 대한 권한 설정 => 없어도 되지만 명시적으로 작성하는게 좋음
+//                .anyRequest().permitAll(); //위 두 엔드포인트 제외 모든 엔드포인트에 대한 권한 설정, 인증 없어도 접근 가능 => 없어도 되지만 명시적으로 작성하는게 좋음
+                .anyRequest().authenticated(); // 인증된 사용자만 모든 엔드포인트에 접근 가능
     }
 }
