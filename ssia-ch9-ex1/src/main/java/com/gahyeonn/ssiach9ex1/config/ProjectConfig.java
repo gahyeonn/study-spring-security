@@ -1,5 +1,6 @@
 package com.gahyeonn.ssiach9ex1.config;
 
+import com.gahyeonn.ssiach9ex1.filter.AuthenticationLoggingFilter;
 import com.gahyeonn.ssiach9ex1.filter.RequestValidationFilter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,7 +17,10 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore( //필터 체인에서 인증 필터 앞에 맞춤형 필터의 인스턴스를 추가
                 new RequestValidationFilter(), //필터 체인에 추가할 맞춤형 필터의 인스턴스
                 BasicAuthenticationFilter.class) //새 인스턴스를 추가할 위치(기존 필터)
-                .authorizeRequests()
+            .addFilterAfter( //필터 체인에서 인증 필터 다음에 맞춤형 필터 인스턴스 추가
+                new AuthenticationLoggingFilter(),
+                BasicAuthenticationFilter.class)
+            .authorizeRequests()
                 .anyRequest().permitAll();
     }
 }
