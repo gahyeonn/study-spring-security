@@ -20,6 +20,7 @@ public class MainController {
     //cors 작동을 확인하기 위해 다른 출처에서 호출할 엔드포인트 정의
     @PostMapping("/test")
     @ResponseBody //@Controller 클래스이기 때문에 명시적 추가 필요
+    @CrossOrigin("http://localhost:8080") //localhost 출처에 대한 cors 허용
     public String test() {
         logger.info("test method call");
         return "Hello";
